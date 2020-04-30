@@ -6,5 +6,8 @@ class Task(models.Model):
 	complete = models.BooleanField(default = False)
 	created = models.DateTimeField(auto_now_add = True)
 
+	# def __init__(self, *args, **kwargs):
+	# 	self.title['title'].widget.attrs['placeholder'] = 'Enter here'
+		
 	def __str__(self):
 		return self.title
