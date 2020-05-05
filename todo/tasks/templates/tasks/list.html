@@ -1,64 +1,43 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
+{% extends 'tasks/main.html' %}
 
-<head>
-    <title>TODO </title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% block content %}
+<div class="center-column boxbody">
 
-    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
-</head>
+    <form method="POST" action="/" >
+        {% csrf_token %} {{form.title}}
+        <input class="btn btn-info submit" type="submit" name="Create Task" >
+    </form>
 
-<body>
+    <div class="todo-list">
 
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="#">
-    <img src="{% static '/images/b.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
-    TODO App
-  </a>
-</nav>
-    <div class="center-column boxbody">
+        {% for task in tasks %}
+        <div class="item-row">
+            <div class="dropdown">
+                <button class="btn btn-secondary btn-sm dropdown-toggle btn-info" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Update
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{% url 'update_task' task.id %}">Change</a>
 
-        <form method="POST" action="/" >
-            {% csrf_token %} {{form.title}}
-            <input class="btn btn-info submit" type="submit" name="Create Task" >
-        </form>
-
-        <div class="todo-list">
-
-            {% for task in tasks %}
-            <div class="item-row">
-                <div class="dropdown">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle btn-info" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Update
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="{% url 'update_task' task.id %}">Change</a>
-
-                        {% if task.complete == True %}
-                        <a class="dropdown-item" href="{% url 'uncheck_task' task.id %}">Uncheck Task</a>
-                        {% else %}
-                        <a class="dropdown-item" href="{% url 'complete_task' task.id %}">Complete Task</a>
-                        {% endif %}
-                    </div>
-
-                     <a class="btn btn-sm btn-delete " href="{% url 'delete_task' task.id %}">Delete</a>
                     {% if task.complete == True %}
-                		<strike>{{task}}</strike> 
-                	{% else %}
-                		<span>{{task}}</span> 
-                	{% endif %}
+                    <a class="dropdown-item" href="{% url 'uncheck_task' task.id %}">Uncheck Task</a>
+                    {% else %}
+                    <a class="dropdown-item" href="{% url 'complete_task' task.id %}">Complete Task</a>
+                    {% endif %}
                 </div>
 
-               <!--  <a class="btn btn-sm btn-info" href="{% url 'update_task' task.id %}">Update</a> -->
-                
+                 <a class="btn btn-sm btn-delete " href="{% url 'delete_task' task.id %}">Delete</a>
+                {% if task.complete == True %}
+                    <strike>{{task}}</strike> 
+                {% else %}
+                    <span>{{task}}</span> 
+                {% endif %}
             </div>
-            {% endfor %}
-        </div>
-    </div>
-</body>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-</html>
+           <!--  <a class="btn btn-sm btn-info" href="{% url 'update_task' task.id %}">Update</a> -->
+            
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

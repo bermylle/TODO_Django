@@ -1,7 +1,11 @@
-<h3>Update Task</h3>
-<form method="POST" action="">
-	{% csrf_token %}
-	{{form}}
-	<input type="submit" name="Update Task">
-	
-</form>
+ {% include 'tasks/main.html' %}
+
+ <div class="center-column boxbody">
+
+        <form method="POST" action="" >
+            {% csrf_token %} {{form.title}}
+            <input class="btn btn-info submit" type="submit" name="Update Task" >
+        </form>
+
+        
+ </div>
