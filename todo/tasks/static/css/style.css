@@ -1,5 +1,5 @@
 body {
-    background-color: #204051;
+    background-color: #30475e;
 
 }
 
@@ -54,4 +54,8 @@ input::placeholder {
 
 .boxbody {
 	margin-top: 100px;
+}
+
+.navbar-color {
+    color: #f8f3eb;
 }

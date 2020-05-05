@@ -1,11 +1,10 @@
  {% include 'tasks/main.html' %}
 
- <div class="center-column boxbody">
+ <div class="center-column boxbody navbar-color">
 
         <form method="POST" action="" >
             {% csrf_token %} {{form.title}}
-            <input class="btn btn-info submit" type="submit" name="Update Task" >
+            <input class="btn btn-info submit" type="submit" name="Update Task">
         </form>
 
-        
  </div>
