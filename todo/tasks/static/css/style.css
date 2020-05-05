@@ -20,7 +20,6 @@ input::placeholder {
 }
 
 
-
 .center-column {
     width: 600px;
     margin: 20px auto;
@@ -46,6 +45,7 @@ input::placeholder {
 	color: white;
     background-color: #ea9085;
     background: linear-gradient(to right, #614385 , #516395);
+    margin-right: 10px;
 }
 
 .btn-delete:hover {

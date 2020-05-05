@@ -35,14 +35,21 @@ def updateTask(request,pk):
 
 def deleteTask(request,pk):
 	item = Task.objects.get(id = pk)
-	if request.method == 'POST':
-		item.delete()
-		return redirect('/')
-	context = {'item' : item}
-	return render(request, 'tasks/delete.html', context)
+	item.delete()
+	# if request.method == 'POST':
+	# 	item.delete()
+	# 	return redirect('/')
+	# context = {'item' : item}
+	return redirect('/')
 
 def completeTask(request,pk):
 	task = Task.objects.get(id = pk)
-
 	task.complete = True
-	return render(request, 'tasks/complete_task.html')
+	task.save()
+	return redirect('/')
+
+def uncheckTask(request,pk):
+	task = Task.objects.get(id = pk)
+	task.complete = False
+	task.save()
+	return redirect('/')

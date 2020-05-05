@@ -34,7 +34,12 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="{% url 'update_task' task.id %}">Change</a>
-                        <a class="dropdown-item" href="#" action = "{% task task.complete == True % }">Complete Task</a>
+
+                        {% if task.complete == True %}
+                        <a class="dropdown-item" href="{% url 'uncheck_task' task.id %}">Uncheck Task</a>
+                        {% else %}
+                        <a class="dropdown-item" href="{% url 'complete_task' task.id %}">Complete Task</a>
+                        {% endif %}
                     </div>
 
                      <a class="btn btn-sm btn-delete " href="{% url 'delete_task' task.id %}">Delete</a>
